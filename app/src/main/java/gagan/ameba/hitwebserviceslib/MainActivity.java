@@ -9,7 +9,7 @@ import java.util.HashMap;
 import gagan.ameba.hitwebservicelibraryg.CallBackWeb;
 import gagan.ameba.hitwebservicelibraryg.SuperWebServiceG;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements CallBackWeb
 {
 
     @Override
@@ -34,14 +34,7 @@ public class MainActivity extends AppCompatActivity
         data.put("parameter", "value");
         data.put("parameter", "value");
         data.put("parameter", "value");
-        new SuperWebServiceG("Enter url of your WS", data, new CallBackWeb()
-        {
-            @Override
-            public void webOnFinish(String output)
-            {
-//                    here you will get response
-            }
-        }).execute();
+        new SuperWebServiceG("Enter url of your WS", data, this).execute();
 //        ================POST webservice
 
 
@@ -51,16 +44,15 @@ public class MainActivity extends AppCompatActivity
     {
         //        ================GET webservice
 
-        new SuperWebServiceG("Enter url of your WS", new HashMap<String, String>(), new CallBackWeb()
-        {
-            @Override
-            public void webOnFinish(String output)
-            {
-//                    here you will get response
-            }
-        }).execute();
+        new SuperWebServiceG("Enter url of your WS", new HashMap<String, String>(), this).execute();
 //        ================GET webservice
 
 
+    }
+
+    @Override
+    public void webOnFinish(String output)
+    {
+        //here you will get rsponse from Web service.......
     }
 }
